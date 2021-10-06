@@ -89,11 +89,37 @@ def test_get_n_choose_k():
     assert get_n_choose_k(15, 10) == 3003
 
 
+def get_leap_years(start: int, end: int):
+    """
+    Afisarea tuturor anilor bisecti  dintre doi ani dati de la tastatura (inclusiv anii dati)
+    :param start: primul an (trebuie sa fie mi mic decat cel de-al doilea)
+    :param end: al doilea an
+    :return: lista anilor bisecti
+    """
+    leap_years_lst = []
+    i = start
+    while i <= end:
+        if i % 4 == 0:
+            leap_years_lst.append(i)
+        i = i + 1
+    return leap_years_lst
+
+
+def test_get_leap_years():
+    assert get_leap_years(2000, 2002) == [2000]
+    assert get_leap_years(2000, 2006) == [2000, 2004]
+    assert get_leap_years(1009, 1020) == [1012, 1016, 1020]
+    assert get_leap_years(2002, 2021) == [2004, 2008, 2012, 2016, 2020]
+    assert get_leap_years(503, 533) == [504, 508, 512, 516, 520, 524, 528, 532]
+    assert get_leap_years(1, 32) == [4, 8, 12, 16, 20, 24, 28, 32]
+
+
 def main():
     while True:
         print('1.Conversia unui numar n din baza 2 in baza 16')
         print('2.Combinari de n luate cate k')
-        print('3.Exit')
+        print('3.Afisarea tuturor anilor bisecti dintre doi ani dati')
+        print('4.Exit')
         optiune = input('Alege optiunea: ')
         if optiune == '1':
             n = input('Dati numarul in baza 2: ')
@@ -103,6 +129,10 @@ def main():
             k = int(input('Dati numarul k: '))
             print(get_n_choose_k(n, k))
         elif optiune == '3':
+            start = int(input('Dati anul de start: '))
+            end = int(input('Dati anul de end: '))
+            print(get_leap_years(start, end))
+        elif optiune == '4':
             break
         else:
             print('optiune invalida')
@@ -110,4 +140,5 @@ def main():
 
 test_get_n_choose_k()
 test_get_base_16_from_2()
+test_get_leap_years()
 main()
